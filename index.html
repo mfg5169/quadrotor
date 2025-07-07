@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quadrotor Vive-based Autonomous Control</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    h1, h2 { color: #333; }
+    ul { line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h1>Quadrotor Project Using Vive Sensor</h1>
+  <p>This project implements real-time embedded control for a quadrotor using a Raspberry Pi and a Vive lighthouse tracking system. A custom IMU (MPU-9250) and joystick interface provide manual overrides and calibration routines.</p>
+  <h2>Components</h2>
+  <ul>
+    <li>Raspberry Pi</li>
+    <li>MPU-9250 IMU</li>
+    <li>PWM board for ESC control</li>
+    <li>Electronic Speed Controllers and motors</li>
+    <li>HTC Vive lighthouse sensors</li>
+    <li>Joystick or keyboard for user input</li>
+    <li>5V power system</li>
+  </ul>
+  <h2>Control Highlights</h2>
+  <ul>
+    <li>Complementary filtering to combine gyro and accelerometer readings:<br>
+        Roll<sub>t</sub> = roll<sub>accel</sub>&nbsp;&times;&nbsp;A&nbsp;+&nbsp;(1&nbsp;-&nbsp;A)&nbsp;&times;&nbsp;(roll<sub>gyroΔ</sub>&nbsp;+&nbsp;Roll<sub>t−1</sub>)</li>
+    <li>IMU calibration averages 1000 samples to zero out bias.</li>
+    <li>Shuts down motors if extreme gyro rates or angles are detected.</li>
+    <li>Keyboard and joystick inputs adjust desired pitch and roll in 0.5&deg; increments.</li>
+    <li>Failsafe logic stops operation on heartbeat timeout or lack of Vive data.</li>
+    <li>Dual–level yaw controllers: one for rate control and another for orientation.</li>
+  </ul>
+  <h2>Workflow</h2>
+  <ol>
+    <li>Calibrate IMU and Vive tracker.</li>
+    <li>Start keyboard or joystick control interface.</li>
+    <li>Command pitch, roll, thrust, yaw and pause/unpause actions.</li>
+    <li>Autonomous control blends joystick and Vive feedback to maintain stability.</li>
+    <li>Logs sensor data and motor outputs to CSV for analysis.</li>
+  </ol>
+  <p>The autonomous mode can be overridden by the joystick at any time, blending manual commands with Vive-derived targets.</p>
+</body>
+</html>
